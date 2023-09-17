@@ -1,4 +1,4 @@
-const redis = require("../db");
+// const redis = require("../db");
 const { promisify } = require("util");
 
 /**
@@ -6,11 +6,11 @@ const { promisify } = require("util");
  * @param key
  * @param time 过期时间设置(min)
  */
-export const resetTime = (key: string, time = 60) => {
-  redis.expire(key, time * 60);
-};
+// export const resetTime = (key: string, time = 60) => {
+//   redis.expire(key, time * 60);
+// };
 
-export const promiseRedis = (client: any) => {
+ const promiseRedis = (client: any) => {
   return {
     exists: promisify(client.exists).bind(client),
     keys: promisify(client.keys).bind(client),
@@ -35,3 +35,9 @@ export const promiseRedis = (client: any) => {
     srem: promisify(client.srem).bind(client),
   };
 };
+
+const fn = {
+  promiseRedis
+}
+
+module.exports = fn

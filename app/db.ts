@@ -1,5 +1,5 @@
 const redis = require("ioredis");
-const { promiseRedis } = require("./fn");
+const { promiseRedis: pr } = require("./fn");
 
 const { REDIS_PORT, REDIS_HOST, REDIS_PASSWORD, REDIS_DB } = process.env as any;
 
@@ -16,7 +16,7 @@ db.on("ready", function () {
 
 // 连接到redis-server回调事件
 db.on("connect", function () {
-  // console.log('redis is now connected!')
+  console.log('redis is now connected!')
 });
 
 db.on("reconnecting", function () {
@@ -35,4 +35,4 @@ db.on("error", function (err: any) {
   console.error("Redis Error " + err);
 });
 
-module.exports = promiseRedis(db);
+module.exports = pr(db);
